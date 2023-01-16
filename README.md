@@ -49,4 +49,4 @@ Here are the bonus part requirements:
 * get_next_line_bonus.h
 * get_next_line_utils_bonus.c
 
-**Important note**: *The bonus aprt will only be assessed if the mandatory part is PERFECT. Perfect means the mandatory part has been integrally done and works without malfunctioning. If you ahve not passed ALL mandatory requirements, your bonus part will not be evaluated at all.
+**Important note**: *The bonus aprt will only be assessed if the mandatory part is PERFECT. Perfect means the mandatory part has been integrally done and works without malfunctioning. If you ahve not passed ALL mandatory requirements, your bonus part will not be evaluated at all.*

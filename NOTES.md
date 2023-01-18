@@ -25,4 +25,10 @@ int main()
 }
 ```
 
+- A static variable remains in memory while the program is running whilst a normal variable gets cleared when the function call is over.
+- Static variables are allocated memory in data segment, not in the stack segment.
+- Static variables (like global variables) are initialized as 0 if not initialized explicitly.
+- In C, static variables can only be initialized using constant literals.
+- Static global variables and functions are also possible in C/C++. The purpose of these is to limit the scope of a variable or function to a file.
+- Static variables should not be declared inside structures.
 

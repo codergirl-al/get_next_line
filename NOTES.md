@@ -54,3 +54,11 @@ Text files are the normal .txt files. They are easy to create in any simple text
 <summary> Binary files </summary>
 Binary files are mostly the .bin files in the computer. Instead of storing the data in plain text, they store it in binary form (0s and 1s). They can hold a higher amount of data which is more secured, however though, harder to read.
 </details>
+
+#### File Operations:
+In c you can perform four major operations on files, either text or binary:
+- Creating a new file.
+- Opening an existing file.
+- Closign a file.
+- Reading/Writing information on a file.
+

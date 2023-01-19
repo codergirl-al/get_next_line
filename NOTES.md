@@ -92,3 +92,36 @@ Opening Modes in Standard I/O:
 | a+		| Open for both reading & appending | Create file								|
 | ab+		| == in binary mode					| Create file								|
 
+- Closing a file
+
+fclose(fptr);
+
+- Reading and writign to a text file
+
+```C
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+	int n;
+	FILE *fptr;
+
+	// use appropriate location when/if using MacOS or Linux
+	fptr = fopen("C:\\program.txt", "w");
+
+	if (fptr == NULL)
+	{
+		printf("Error!");
+		exit(1);
+	}
+
+	printf("Enter num: ");
+	scanf("%d", &n);
+
+	fprintf(fptr, "%d", n);
+	fclose(fptr);
+
+	return (0);
+}
+```

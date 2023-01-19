@@ -77,5 +77,18 @@ fopen("E:\\program\\oldprogram.bin", "rb"); // rb meaning READ BINARY
 
 Opening Modes in Standard I/O:
 
-
+| Mode		| Meaning of Mode					| During Inexistence of file				|
+|-----------|-----------------------------------|-------------------------------------------|
+| r			| Open for reading					| fopen() returns NULL						|
+| rb		| Open for reading in binary mode	| fopen() returns NULL						|
+| w			| Open for writing					| Create file, otherwise overwrite content	|
+| wb		| Open for writing in binary mode	| Create file, otherwise overwrite content	|
+| a			| Open for append data on the end	| Create file								|
+| ab		| Open for append on binary			| Create file								|
+| r+		| Open for both reading and writing	| fopen() returns NULL						|
+| rb+		| -||- in binary mode				| fopen() returns NULL						|
+| w+		| Open for both reading and writing	| Create file, otherwise overwrite content	|
+| wb+		| -||- in binary mode				| Create file, otherwise overwrite content	|
+| a+		| Open for both reading & appending | Create file								|
+| ab+		| -||- in binary mode				| Create file								|
 

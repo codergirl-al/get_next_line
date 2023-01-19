@@ -62,3 +62,20 @@ In c you can perform four major operations on files, either text or binary:
 - Closign a file.
 - Reading/Writing information on a file.
 
+#### Working with files:
+
+- Declaring a pointer of type file.
+
+FILE *fptr;
+
+- Opening a file.
+
+ptr = fopen("fileopen", "mode");
+for example:
+fopen("E:\\program\\newprogram.txt", "w"); // w meaning WRITE
+fopen("E:\\program\\oldprogram.bin", "rb"); // rb meaning READ BINARY
+
+Opening Modes in Standard I/O:
+
+
+

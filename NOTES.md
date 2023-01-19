@@ -34,6 +34,16 @@ int main()
 - Static variables should not be declared inside structures.
 </details>
 
+### Read() function in C
+
+**read(int fd, void *buf, ssize_t BUFFER_SIZE);**
+
+with:
+
+* **fd** being the file descriptor.
+* **buf** being the pointer to the buffer that receives the data.
+* **BUFFER_SIZE** being the length in bytes of the bufferp ointed to by the buf parameter.
+
 ### Working with files in C
 
 A file is a container in computer storage devices used for storign data.

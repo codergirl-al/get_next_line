@@ -86,9 +86,9 @@ Opening Modes in Standard I/O:
 | a			| Open for append data on the end	| Create file								|
 | ab		| Open for append on binary			| Create file								|
 | r+		| Open for both reading and writing	| fopen() returns NULL						|
-| rb+		| -||- in binary mode				| fopen() returns NULL						|
+| rb+		| == in binary mode					| fopen() returns NULL						|
 | w+		| Open for both reading and writing	| Create file, otherwise overwrite content	|
-| wb+		| -||- in binary mode				| Create file, otherwise overwrite content	|
+| wb+		| == in binary mode					| Create file, otherwise overwrite content	|
 | a+		| Open for both reading & appending | Create file								|
-| ab+		| -||- in binary mode				| Create file								|
+| ab+		| == in binary mode					| Create file								|
 

@@ -64,18 +64,22 @@ In c you can perform four major operations on files, either text or binary:
 
 #### Working with files:
 
-- Declaring a pointer of type file.
+##### Declaring a pointer of type file.
 
 FILE *fptr;
 
-- Opening a file.
+##### Opening a file.
 
 ptr = fopen("fileopen", "mode");
 for example:
 fopen("E:\\program\\newprogram.txt", "w"); // w meaning WRITE
 fopen("E:\\program\\oldprogram.bin", "rb"); // rb meaning READ BINARY
 
-Opening Modes in Standard I/O:
+##### Closing a file
+
+fclose(fptr);
+
+#### Opening Modes in Standard I/O:
 
 | Mode		| Meaning of Mode					| During Inexistence of file				|
 |-----------|-----------------------------------|-------------------------------------------|
@@ -92,11 +96,7 @@ Opening Modes in Standard I/O:
 | a+		| Open for both reading & appending | Create file								|
 | ab+		| == in binary mode					| Create file								|
 
-- Closing a file
-
-fclose(fptr);
-
-- Reading and writign to a text file
+#### Reading and writing to a text file
 
 ```C
 #include <stdio.h>
@@ -123,5 +123,39 @@ int main()
 	fclose(fptr);
 
 	return (0);
+}
+```
+
+#### Reading from a text file
+
+```C
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+	int n;
+	FILE *fptr;
+
+	if ((fptr = fopen("C:\\program.txt", "r")) == NULL) {
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+   int num;
+   FILE *fptr;
+
+   if ((fptr = fopen("C:\\program.txt","r")) == NULL){
+       printf("Error! opening file");
+
+       // Program exits if the file pointer returns NULL.
+       exit(1);
+	}
+   fscanf(fptr,"%d", &num);
+
+   printf("Value of n=%d", num);
+   fclose(fptr); 
+	return 0;
 }
 ```

@@ -138,15 +138,6 @@ int main()
 	FILE *fptr;
 
 	if ((fptr = fopen("C:\\program.txt", "r")) == NULL) {
-#include <stdio.h>
-#include <stdlib.h>
-
-int main()
-{
-   int num;
-   FILE *fptr;
-
-   if ((fptr = fopen("C:\\program.txt","r")) == NULL){
        printf("Error! opening file");
 
        // Program exits if the file pointer returns NULL.

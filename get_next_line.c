@@ -6,15 +6,39 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 17:43:02 by apeposhi          #+#    #+#             */
-/*   Updated: 2023/01/30 17:30:57 by apeposhi         ###   ########.fr       */
+/*   Updated: 2023/01/31 13:29:27 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
+char	*create(int pos, char **buff)
+{
+	char	*temp;
+	char	*result;
+
+	temp = NULL;
+	if(pos <= 0)
+	{
+		if (**buff == '\0')
+		{
+			free(*buff);
+			*buff = NULL;
+			return (NULL);
+		}
+		result = *buff;
+		*buff = NULL;
+	return (result);
+	}
+	temp = ft_substr(*buff, pos, BUFFER_SIZE);
+	result = *buff;
+	result[pos] = 0;
+	*buff = temp;
+	return (result);
+}
+
 char	*get_line(int fd, char **buff, char *read)
 {
-	//in  developeplopeleoplement
 }
 
 void	free_space(char **ptr_to_free)

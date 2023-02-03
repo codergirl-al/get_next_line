@@ -6,7 +6,7 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 17:43:02 by apeposhi          #+#    #+#             */
-/*   Updated: 2023/01/31 13:29:27 by apeposhi         ###   ########.fr       */
+/*   Updated: 2023/02/03 16:53:23 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*create(int pos, char **buff)
 	char	*result;
 
 	temp = NULL;
-	if(pos <= 0)
+	if (pos <= 0)
 	{
 		if (**buff == '\0')
 		{
@@ -28,7 +28,7 @@ char	*create(int pos, char **buff)
 		}
 		result = *buff;
 		*buff = NULL;
-	return (result);
+		return (result);
 	}
 	temp = ft_substr(*buff, pos, BUFFER_SIZE);
 	result = *buff;
@@ -37,9 +37,6 @@ char	*create(int pos, char **buff)
 	return (result);
 }
 
-char	*get_line(int fd, char **buff, char *read)
-{
-}
 
 void	free_space(char **ptr_to_free)
 {
@@ -50,13 +47,35 @@ void	free_space(char **ptr_to_free)
 	}
 }
 
+
+char	*get_line(int fd, char **buff, char *read_r)
+{
+	ssize_t	read_b;
+	char	*temp;
+	char	*new_line;
+
+	new_line = ft_strchr(*buff, '\n');
+	temp = NULL;
+	read_b = read(fd, read_r, BUFFER_SIZE);
+	if (read_b <= 0)
+	{
+		return (create(read_b, buff));
+		read_r[read_b] = 0;
+		temp = ft_strjoin(*buff, read_r);
+		free_space(buff);
+		*buff = temp;
+		new_line = ft_strchr(*buff, '\n');
+	}
+	return (create(new_line - *buff + 1, buff));
+}
+
 char	*get_next_line(int fd)
 {
-	static char		*buff = NULL;
+	static char		*buff[MAX_FD + 1];
 	char			*read;
 	char			*res;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || fd > BUFFER_SIZE)
+	if (fd < 0 || BUFFER_SIZE <= 0 || fd > MAX_FD)
 		return (NULL);
 	read = (char *)malloc(sizeof(char) * BUFFER_SIZE + 1);
 	if (!read)
@@ -65,5 +84,5 @@ char	*get_next_line(int fd)
 		buff[fd] = ft_strdup("");
 	res = get_line(fd, &buff, read);
 	free_space(&read);
-	return (res);	
+	return (res);
 }

@@ -160,3 +160,5 @@ int main()
 	return 0;
 }
 ```
+
+**ssize_t** is a signed size_t. In this case, -1 indicates an error.

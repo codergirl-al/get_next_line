@@ -6,7 +6,7 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 17:43:00 by apeposhi          #+#    #+#             */
-/*   Updated: 2023/01/30 13:49:08 by apeposhi         ###   ########.fr       */
+/*   Updated: 2023/02/03 16:49:33 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ size_t	ft_strlen(const char *s)
 ** @param str: a NULL-terminated stirng
 ** @return the new string after duplication from the given string
 */
+
+
 char	*ft_strdup(const char *s)
 {
 	size_t	i;

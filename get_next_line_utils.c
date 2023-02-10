@@ -6,7 +6,7 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 17:43:00 by apeposhi          #+#    #+#             */
-/*   Updated: 2023/02/08 17:00:34 by apeposhi         ###   ########.fr       */
+/*   Updated: 2023/02/09 16:28:05 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ char	*ft_strdup(const char *s)
 	char	*s2;
 	size_t	len;
 
+	if (!s)
+		return (NULL);
 	len = ft_strlen(s);
 	s2 = (char *) malloc(sizeof(char) * len + 1);
 	if (!s2)
@@ -71,7 +73,7 @@ char	*ft_strchr(const char *s, int c)
 	ptr = (char *)s;
 	i = 0;
 	f = (unsigned char) c;
-	while (s[i] != '\0')
+	while (s[i])
 	{
 		if (s[i] == f)
 			return (&(ptr[i]));
@@ -100,8 +102,12 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	size_t	len;
 	size_t	j;
 
-	if (!s1 || !s2)
+	if (!s1 && !s2)
 		return (NULL);
+	if (!s1)
+		return (ft_strdup(s2));
+	if (!s2)
+		return (ft_strdup(s1));
 	len = ft_strlen(s1) + ft_strlen(s2) + 1;
 	res = malloc(len * sizeof(char));
 	if (!res)

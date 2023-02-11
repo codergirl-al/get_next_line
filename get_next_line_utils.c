@@ -6,7 +6,7 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 17:43:00 by apeposhi          #+#    #+#             */
-/*   Updated: 2023/02/09 16:28:05 by apeposhi         ###   ########.fr       */
+/*   Updated: 2023/02/11 15:10:50 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,34 +54,6 @@ char	*ft_strdup(const char *s)
 	}
 	s2[len] = '\0';
 	return (s2);
-}
-
-/*
-** @brief Locate the first given char in a given string.
-**
-** @param str: a NULL-terminated string
-** @param c:   the value to find in the string, it is interpreted
-** as char during search.
-** @return the memory address of the value in the string
-*/
-char	*ft_strchr(const char *s, int c)
-{
-	int				i;
-	char			*ptr;
-	unsigned char	f;
-
-	ptr = (char *)s;
-	i = 0;
-	f = (unsigned char) c;
-	while (s[i])
-	{
-		if (s[i] == f)
-			return (&(ptr[i]));
-		i++;
-	}
-	if (f == '\0')
-		return (&(ptr[i]));
-	return (0);
 }
 
 /*

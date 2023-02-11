@@ -6,7 +6,7 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 17:43:05 by apeposhi          #+#    #+#             */
-/*   Updated: 2023/02/08 16:38:58 by apeposhi         ###   ########.fr       */
+/*   Updated: 2023/02/11 15:25:01 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define GET_NEXT_LINE_H
 
 # ifndef BUFFER_SIZE
-#	define BUFFER_SIZE 20
+#	define BUFFER_SIZE 2
 # endif
 
 # include <stdlib.h>

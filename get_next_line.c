@@ -6,11 +6,13 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 17:43:02 by apeposhi          #+#    #+#             */
-/*   Updated: 2023/02/09 10:26:54 by apeposhi         ###   ########.fr       */
+/*   Updated: 2023/02/11 16:20:11 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+#include <stdio.h>
 
 void	free_space(char *ptr_to_free)
 {
@@ -33,6 +35,7 @@ char	*ft_get_read(char *s_buff)
 	while (s_buff[i] && s_buff[i] != '\n')
 	{
 		str[i] = s_buff[i];
+		// printf("/%c\n", s_buff[i]);
 		i++;
 	}
 	if (s_buff[i] == '\n')
@@ -41,6 +44,7 @@ char	*ft_get_read(char *s_buff)
 		i++;
 	}
 	str[i] = '\0';
+	// printf("read - ended => %s", str);
 	return (str);
 }
 
@@ -80,11 +84,12 @@ char	*ft_get_line_and_store_output(int fd, char **s_buff)
 	if (!t_buff)
 		return (NULL);
 	byte_r = 1;
-	while ((*s_buff == NULL || (*s_buff != NULL && !ft_strchr(*s_buff, '\n'))) && byte_r != 0)
+	while (byte_r > 0)
 	{
 		byte_r = read(fd, t_buff, BUFFER_SIZE);
 		if (byte_r == -1)
 		{
+			printf("%d\n", byte_r);
 			free_space(t_buff);
 			return (NULL);
 		}
@@ -102,12 +107,44 @@ char	*get_next_line(int fd)
 	static char		*static_buffer;
 	char			*read_l;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || fd > 1024 || read (fd, static_buffer, 0) == -1)
+	if (fd < 0 || BUFFER_SIZE < 0 || fd > 1024 || read(fd, static_buffer, 0) < 0)
+	{
+		free(static_buffer);
+		static_buffer = NULL;
+		printf("endingggggg %s\n", static_buffer);
 		return (0);
+	}
 	static_buffer = ft_get_line_and_store_output(fd, &static_buffer);
 	if (!static_buffer)
 		return (NULL);
 	read_l = ft_get_read(static_buffer);
 	static_buffer = ft_get_buff(static_buffer);
 	return (read_l);
+}
+
+int main()
+{
+	int	fd;
+
+	fd = open("empty.txt", O_RDONLY);
+	printf("%s", get_next_line(fd));
+	printf("%s", get_next_line(fd));
+	printf("%s", get_next_line(fd));
+	printf("%s", get_next_line(fd));
+	printf("%s", get_next_line(fd));
+	printf("%s", get_next_line(fd));
+	printf("%s", get_next_line(fd));
+	printf("%s", get_next_line(fd));
+	printf("%s", get_next_line(fd));
+	printf("%s", get_next_line(fd));
+	printf("%s", get_next_line(fd));
+	printf("%s", get_next_line(fd));
+	printf("%s", get_next_line(fd));
+	printf("%s", get_next_line(fd));
+	printf("%s", get_next_line(fd));
+	
+	printf("%s", get_next_line(fd));
+	printf("%s", get_next_line(fd));
+	printf("%s", get_next_line(fd));
+	return (0);
 }

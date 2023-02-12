@@ -6,7 +6,7 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 17:43:02 by apeposhi          #+#    #+#             */
-/*   Updated: 2023/02/11 16:20:11 by apeposhi         ###   ########.fr       */
+/*   Updated: 2023/02/12 14:11:40 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ char	*ft_get_read(char *s_buff)
 	char	*str;
 
 	i = 0;
+	if (!s_buff[0])
+		return (NULL);
 	while (s_buff[i] && s_buff[i] != '\n')
 		i++;
 	str = (char *)malloc(sizeof(char) * (i + 2));
@@ -35,7 +37,6 @@ char	*ft_get_read(char *s_buff)
 	while (s_buff[i] && s_buff[i] != '\n')
 	{
 		str[i] = s_buff[i];
-		// printf("/%c\n", s_buff[i]);
 		i++;
 	}
 	if (s_buff[i] == '\n')
@@ -44,7 +45,6 @@ char	*ft_get_read(char *s_buff)
 		i++;
 	}
 	str[i] = '\0';
-	// printf("read - ended => %s", str);
 	return (str);
 }
 
@@ -87,16 +87,15 @@ char	*ft_get_line_and_store_output(int fd, char **s_buff)
 	while (byte_r > 0)
 	{
 		byte_r = read(fd, t_buff, BUFFER_SIZE);
-		if (byte_r == -1)
-		{
-			printf("%d\n", byte_r);
-			free_space(t_buff);
-			return (NULL);
-		}
 		t_buff[byte_r] = '\0';
 		tmp = ft_strjoin(*s_buff, t_buff);
 		free_space(*s_buff);
 		*s_buff = tmp;
+	}
+	if (byte_r == -1)
+	{
+		free_space(t_buff);
+		return (NULL);
 	}
 	free_space(t_buff);
 	return (*s_buff);
@@ -110,41 +109,26 @@ char	*get_next_line(int fd)
 	if (fd < 0 || BUFFER_SIZE < 0 || fd > 1024 || read(fd, static_buffer, 0) < 0)
 	{
 		free(static_buffer);
-		static_buffer = NULL;
-		printf("endingggggg %s\n", static_buffer);
-		return (0);
+		return (static_buffer);
 	}
 	static_buffer = ft_get_line_and_store_output(fd, &static_buffer);
 	if (!static_buffer)
-		return (NULL);
+		return (static_buffer);
 	read_l = ft_get_read(static_buffer);
 	static_buffer = ft_get_buff(static_buffer);
 	return (read_l);
 }
 
-int main()
-{
-	int	fd;
+// int main()
+// {
+// 	int	fd;
 
-	fd = open("empty.txt", O_RDONLY);
-	printf("%s", get_next_line(fd));
-	printf("%s", get_next_line(fd));
-	printf("%s", get_next_line(fd));
-	printf("%s", get_next_line(fd));
-	printf("%s", get_next_line(fd));
-	printf("%s", get_next_line(fd));
-	printf("%s", get_next_line(fd));
-	printf("%s", get_next_line(fd));
-	printf("%s", get_next_line(fd));
-	printf("%s", get_next_line(fd));
-	printf("%s", get_next_line(fd));
-	printf("%s", get_next_line(fd));
-	printf("%s", get_next_line(fd));
-	printf("%s", get_next_line(fd));
-	printf("%s", get_next_line(fd));
-	
-	printf("%s", get_next_line(fd));
-	printf("%s", get_next_line(fd));
-	printf("%s", get_next_line(fd));
-	return (0);
-}
+// 	fd = open("empty.txt", O_RDONLY);
+// 	printf("%s", get_next_line(fd));
+// 	printf("%s", get_next_line(fd));
+// 	printf("%s", get_next_line(fd));
+// 	printf("%s", get_next_line(fd));
+// 	printf("%s", get_next_line(fd));
+// 	printf("%s", get_next_line(fd));
+// 	return (0);
+// }

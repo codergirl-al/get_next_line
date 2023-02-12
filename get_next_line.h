@@ -6,7 +6,7 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 17:43:05 by apeposhi          #+#    #+#             */
-/*   Updated: 2023/02/11 15:25:01 by apeposhi         ###   ########.fr       */
+/*   Updated: 2023/02/12 14:04:56 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,6 @@ char	*ft_strdup(const char *s);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
+size_t	ft_strlcpy(char *dst, const char *src, size_t size);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 17:43:00 by apeposhi          #+#    #+#             */
-/*   Updated: 2023/02/11 15:10:50 by apeposhi         ###   ########.fr       */
+/*   Updated: 2023/02/12 14:09:54 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,4 +132,32 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	}
 	substr[i] = 0;
 	return (substr);
+}
+
+/*
+** @brief Safe copy of the source string to the destination 
+** string. It only copies up to a maximum amount of char.
+**
+** @param dest: the destination memory address to copy to.
+** @param src:  a NULL-terminated string to be copied from.
+** @param max_len: the maximum length of char to be copied.
+** @return the length of the destination string after copying.
+*/
+size_t	ft_strlcpy(char *dst, const char *src, size_t size)
+{
+	size_t	n;
+
+	n = 0;
+	if (size > 0)
+	{
+		while (src[n] && n < (size - 1))
+		{
+			dst[n] = src[n];
+			n++;
+		}
+		dst[n] = 0;
+	}
+	while (src[n])
+		n++;
+	return (n);
 }

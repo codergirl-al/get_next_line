@@ -6,7 +6,7 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 17:43:02 by apeposhi          #+#    #+#             */
-/*   Updated: 2023/02/13 16:45:57 by apeposhi         ###   ########.fr       */
+/*   Updated: 2023/02/13 17:19:30 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,9 +98,10 @@ char	*get_next_line(int fd)
 	static char		*static_buffer;
 	char			*read_l;
 
-	if (fd < 0 || BUFFER_SIZE < 0 || fd > 1024 || read(fd, static_buffer, 0) < 0)
+	if (fd < 0 || BUFFER_SIZE < 0 || read(fd, static_buffer, 0) < 0)
 	{
-		free(static_buffer);
+		if (static_buffer)
+			free(static_buffer);
 		return (NULL);
 	}
 	static_buffer = ft_get_line_and_store_output(fd, &static_buffer);

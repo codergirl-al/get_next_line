@@ -6,7 +6,7 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 17:43:02 by apeposhi          #+#    #+#             */
-/*   Updated: 2023/02/13 13:33:19 by apeposhi         ###   ########.fr       */
+/*   Updated: 2023/02/13 16:45:57 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ char	*ft_get_line_and_store_output(int fd, char **s_buff)
 {
 	char	*t_buff;
 	int		byte_r;
-	char	*tmp;
 
 	t_buff = malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!t_buff)
@@ -82,9 +81,8 @@ char	*ft_get_line_and_store_output(int fd, char **s_buff)
 	{
 		byte_r = read(fd, t_buff, BUFFER_SIZE);
 		t_buff[byte_r] = '\0';
-		tmp = ft_strjoin(*s_buff, t_buff);
-		free(*s_buff);
-		*s_buff = tmp;
+		*s_buff = ft_strjoin(*s_buff, t_buff);
+
 	}
 	if (byte_r == -1)
 	{
@@ -118,10 +116,6 @@ char	*get_next_line(int fd)
 // 	int	fd;
 
 // 	fd = open("empty.txt", O_RDONLY);
-// 	printf("%s", get_next_line(fd));
-// 	printf("%s", get_next_line(fd));
-// 	printf("%s", get_next_line(fd));
-// 	printf("%s", get_next_line(fd));
 // 	printf("%s", get_next_line(fd));
 // 	printf("%s", get_next_line(fd));
 // 	return (0);

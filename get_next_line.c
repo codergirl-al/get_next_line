@@ -6,19 +6,13 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 17:43:02 by apeposhi          #+#    #+#             */
-/*   Updated: 2023/02/12 14:11:40 by apeposhi         ###   ########.fr       */
+/*   Updated: 2023/02/13 13:33:19 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
 #include <stdio.h>
-
-void	free_space(char *ptr_to_free)
-{
-	if (ptr_to_free != NULL)
-		free(ptr_to_free);
-}
 
 char	*ft_get_read(char *s_buff)
 {
@@ -34,7 +28,7 @@ char	*ft_get_read(char *s_buff)
 	if (!str)
 		return (NULL);
 	i = 0;
-	while (s_buff[i] && s_buff[i] != '\n')
+	while (s_buff[i] != '\0' && s_buff[i] != '\n')
 	{
 		str[i] = s_buff[i];
 		i++;
@@ -59,7 +53,7 @@ char	*ft_get_buff(char *s_buff)
 		i++;
 	if (!s_buff[i])
 	{
-		free_space(s_buff);
+		free(s_buff);
 		return (NULL);
 	}
 	str = (char *)malloc(sizeof(char) * (ft_strlen(s_buff) - i + 1));
@@ -70,7 +64,7 @@ char	*ft_get_buff(char *s_buff)
 	while (s_buff[i])
 		str[c++] = s_buff[i++];
 	str[c] = '\0';
-	free_space(s_buff);
+	free(s_buff);
 	return (str);
 }
 
@@ -89,15 +83,15 @@ char	*ft_get_line_and_store_output(int fd, char **s_buff)
 		byte_r = read(fd, t_buff, BUFFER_SIZE);
 		t_buff[byte_r] = '\0';
 		tmp = ft_strjoin(*s_buff, t_buff);
-		free_space(*s_buff);
+		free(*s_buff);
 		*s_buff = tmp;
 	}
 	if (byte_r == -1)
 	{
-		free_space(t_buff);
+		free(t_buff);
 		return (NULL);
 	}
-	free_space(t_buff);
+	free(t_buff);
 	return (*s_buff);
 }
 
@@ -109,7 +103,7 @@ char	*get_next_line(int fd)
 	if (fd < 0 || BUFFER_SIZE < 0 || fd > 1024 || read(fd, static_buffer, 0) < 0)
 	{
 		free(static_buffer);
-		return (static_buffer);
+		return (NULL);
 	}
 	static_buffer = ft_get_line_and_store_output(fd, &static_buffer);
 	if (!static_buffer)

@@ -6,7 +6,7 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 17:43:00 by apeposhi          #+#    #+#             */
-/*   Updated: 2023/02/12 14:09:54 by apeposhi         ###   ########.fr       */
+/*   Updated: 2023/02/13 13:34:05 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ char	*ft_strdup(const char *s)
 ** concatenation of the 2 original strings. NULL is returned if
 ** malloc fails.
 */
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
 	char	*res;
 	size_t	i;
@@ -81,7 +81,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	if (!s2)
 		return (ft_strdup(s1));
 	len = ft_strlen(s1) + ft_strlen(s2) + 1;
-	res = malloc(len * sizeof(char));
+	res = (char *)malloc(len + 1 * sizeof(char));
 	if (!res)
 		return (NULL);
 	i = 0;
@@ -98,40 +98,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		i++;
 	}
 	return (res);
-}
-
-/*
-** @brief Cut a substring out of a given string by its starting index
-** and length. Th substring is stored in a new memory address. The
-** original string is left untouched.
-**
-** @param str:     a NULL-terminated string to cut the string from.
-** @paarm start:   the starting index to cut from the string
-** @param max_len: the maximum length to cut from the string
-** @return the newly created substring
-*/
-char	*ft_substr(char const *s, unsigned int start, size_t len)
-{
-	size_t	i;
-	char	*substr;
-
-	if (!s || start < 0)
-		return (NULL);
-	i = 0;
-	if (ft_strlen(s) < start)
-		return (ft_strdup(""));
-	else if (ft_strlen(s) - start < len)
-		len = ft_strlen(s) - start;
-	substr = malloc(sizeof(char) * (len + 1));
-	if (!substr)
-		return (NULL);
-	while (s[start + i] && i < len)
-	{
-		substr[i] = s[start + i];
-		i++;
-	}
-	substr[i] = 0;
-	return (substr);
 }
 
 /*

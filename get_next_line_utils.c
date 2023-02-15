@@ -6,7 +6,7 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 17:43:00 by apeposhi          #+#    #+#             */
-/*   Updated: 2023/02/13 17:25:45 by apeposhi         ###   ########.fr       */
+/*   Updated: 2023/02/15 14:54:51 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,36 +26,6 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-/* 
-** @brief Duplicates a string to a new memory address.
-**
-** @param str: a NULL-terminated stirng
-** @return the new string after duplication from the given string
-*/
-
-
-char	*ft_strdup(const char *s)
-{
-	size_t	i;
-	char	*s2;
-	size_t	len;
-
-	if (!s)
-		return (NULL);
-	len = ft_strlen(s);
-	s2 = (char *) malloc(sizeof(char) * len + 1);
-	if (!s2)
-		return (NULL);
-	i = 0;
-	while (s[i])
-	{
-		s2[i] = s[i];
-		i++;
-	}
-	s2[len] = '\0';
-	return (s2);
-}
-
 /*
 ** @brief Join two strings into a new memory. The second string
 ** is concatenated after the first string. It is equivalence
@@ -69,58 +39,46 @@ char	*ft_strdup(const char *s)
 */
 char	*ft_strjoin(char *s1, char *s2)
 {
-	size_t	index;
-	size_t	count;
-	char	*result;
+	size_t	i;
+	size_t	j;
+	char	*res;
 
 	if (!s1)
 	{
-		s1 = (char *)malloc(1 * sizeof(char));
+		s1 = (char *)malloc(sizeof(char));
 		s1[0] = '\0';
 	}
-	if (!s1 || (!s1 && !s2))
+	if (!s1)
 		return (NULL);
 	if (!s2)
 		return (s1);
-	result = malloc ((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
-	if (result == NULL)
+	res = (char *)malloc (ft_strlen(s1) + ft_strlen(s2) + 1 * sizeof(char));
+	if (res == NULL)
 		return (NULL);
-	index = -1;
-	count = 0;
-	if (s1)
-		while (s1[++index] != '\0')
-			result[index] = s1[index];
-	while (s2[count] != '\0')
-		result[index++] = s2[count++];
-	result[ft_strlen(s1) + ft_strlen(s2)] = '\0';
-	free(s1);
-	return (result);
+	i = -1;
+	j = 0;
+	while (s1[++i] != '\0')
+		res[i] = s1[i];
+	while (s2[j] != '\0')
+		res[i++] = s2[j++];
+	res[ft_strlen(s1) + ft_strlen(s2)] = '\0';
+	return (free(s1), res);
 }
 
-/*
-** @brief Safe copy of the source string to the destination 
-** string. It only copies up to a maximum amount of char.
-**
-** @param dest: the destination memory address to copy to.
-** @param src:  a NULL-terminated string to be copied from.
-** @param max_len: the maximum length of char to be copied.
-** @return the length of the destination string after copying.
-*/
-size_t	ft_strlcpy(char *dst, const char *src, size_t size)
+char	*ft_strchr(const char *s, int c)
 {
-	size_t	n;
+	size_t	i;
+	char	cc;
 
-	n = 0;
-	if (size > 0)
+	i = 0;
+	cc = (char) c;
+	while (s[i] != '\0')
 	{
-		while (src[n] && n < (size - 1))
-		{
-			dst[n] = src[n];
-			n++;
-		}
-		dst[n] = 0;
+		if (s[i] == cc)
+			return ((char *) s + i);
+		i++;
 	}
-	while (src[n])
-		n++;
-	return (n);
+	if (cc == s[i])
+		return ((char *) s + i);
+	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 17:43:02 by apeposhi          #+#    #+#             */
-/*   Updated: 2023/02/15 14:51:56 by apeposhi         ###   ########.fr       */
+/*   Updated: 2023/02/16 09:11:22 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@ char	*ft_get_read(char *s_buff)
 		i++;
 	str = (char *)malloc(sizeof(char) * (i + 2));
 	if (!str)
+	{
+		free(s_buff);
 		return (NULL);
+	}
 	i = 0;
 	while (s_buff[i] != '\0' && s_buff[i] != '\n')
 	{
@@ -56,7 +59,10 @@ char	*ft_get_buff(char *s_buff)
 	}
 	str = (char *)malloc(sizeof(char) * (ft_strlen(s_buff) - i + 1));
 	if (!str)
+	{
+		free(s_buff);
 		return (NULL);
+	}
 	i++;
 	c = 0;
 	while (s_buff[i])

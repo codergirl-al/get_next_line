@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/16 17:43:02 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/06/08 17:18:08 by apeposhi         ###   ########.fr       */
+/*   Created: 2024/06/08 16:46:40 by apeposhi          #+#    #+#             */
+/*   Updated: 2024/06/08 16:54:57 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char *ft_get_read(char *s_buff)
 {
@@ -18,7 +18,7 @@ char *ft_get_read(char *s_buff)
     char *str;
 
     if (!s_buff[0])
-        return NULL;
+        return (NULL);
     i = 0;
     while (s_buff[i] && s_buff[i] != '\n')
         i++;
@@ -26,20 +26,17 @@ char *ft_get_read(char *s_buff)
     if (!str)
     {
         free(s_buff);
-        return NULL;
+        return (NULL);
     }
     i = 0;
-	while (s_buff[i] != '\0' && s_buff[i] != '\n')
+    while (s_buff[i] && s_buff[i] != '\n')
     {
         str[i] = s_buff[i];
         i++;
     }
     if (s_buff[i] == '\n')
-	{
         str[i] = s_buff[i];
-		i++;
-	}
-	*(str + i) = '\0';
+    str[i + 1] = '\0';
     return (str);
 }
 
@@ -97,7 +94,7 @@ char	*ft_get_line_and_store_output(int fd, char *s_buff)
 
 char	*get_next_line(int fd)
 {
-	static char		*static_buffer;
+	static char		**static_buffer;
 	char			*read_l;
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, static_buffer, 0) < 0)
@@ -109,10 +106,10 @@ char	*get_next_line(int fd)
 		}
 		return (NULL);
 	}
-	static_buffer = ft_get_line_and_store_output(fd, static_buffer);
-	if (!static_buffer)
+	static_buffer[fd] = ft_get_line_and_store_output(fd, static_buffer[fd]);
+	if (!static_buffer[fd])
 		return (NULL);
-	read_l = ft_get_read(static_buffer);
-	static_buffer = ft_get_buff(static_buffer);
+	read_l = ft_get_read(static_buffer[fd]);
+	static_buffer[fd] = ft_get_buff(static_buffer[fd]);
 	return (read_l);
 }

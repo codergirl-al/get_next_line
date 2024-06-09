@@ -6,7 +6,7 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 16:47:24 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/06/08 16:49:48 by apeposhi         ###   ########.fr       */
+/*   Updated: 2024/06/09 15:38:02 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <fcntl.h>
+# include <limits.h>
+# include <sys/types.h>
+# include <sys/uio.h>
 
 char	*get_next_line(int fd);
 size_t	ft_strlen(const char *s);

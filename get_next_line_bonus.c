@@ -6,7 +6,7 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 16:46:40 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/06/08 16:54:57 by apeposhi         ###   ########.fr       */
+/*   Updated: 2024/06/09 16:09:20 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ char *ft_get_read(char *s_buff)
     char *str;
 
     if (!s_buff[0])
-        return (NULL);
+        return NULL;
     i = 0;
-    while (s_buff[i] && s_buff[i] != '\n')
+    while (s_buff[i] != '\0' && s_buff[i] != '\n')
         i++;
     str = (char *)malloc(sizeof(char) * (i + 2));
     if (!str)
@@ -28,15 +28,12 @@ char *ft_get_read(char *s_buff)
         free(s_buff);
         return (NULL);
     }
-    i = 0;
-    while (s_buff[i] && s_buff[i] != '\n')
-    {
+    i = -1;
+	while (s_buff[++i] && s_buff[i] != '\n')
         str[i] = s_buff[i];
-        i++;
-    }
     if (s_buff[i] == '\n')
-        str[i] = s_buff[i];
-    str[i + 1] = '\0';
+        str[i++] = '\n';
+	*(str + i) = '\0';
     return (str);
 }
 
@@ -69,7 +66,7 @@ char	*ft_get_buff(char *s_buff)
 	return (str);
 }
 
-char	*ft_get_line_and_store_output(int fd, char *s_buff)
+char	*ft_get_buffer(int fd, char *s_buff)
 {
 	char	*t_buff;
 	int		byte_r;
@@ -94,19 +91,19 @@ char	*ft_get_line_and_store_output(int fd, char *s_buff)
 
 char	*get_next_line(int fd)
 {
-	static char		**static_buffer;
+	static char		*static_buffer[OPEN_MAX];
 	char			*read_l;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, static_buffer, 0) < 0)
+	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, static_buffer[fd], 0) < 0)
 	{
-		if (static_buffer)
+		if (static_buffer[fd])
 		{
-			free(static_buffer);
-			static_buffer = NULL;
+			free(static_buffer[fd]);
+			static_buffer[fd] = NULL;
 		}
 		return (NULL);
 	}
-	static_buffer[fd] = ft_get_line_and_store_output(fd, static_buffer[fd]);
+	static_buffer[fd] = ft_get_buffer(fd, static_buffer[fd]);
 	if (!static_buffer[fd])
 		return (NULL);
 	read_l = ft_get_read(static_buffer[fd]);

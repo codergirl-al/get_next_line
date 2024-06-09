@@ -6,7 +6,7 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 17:43:02 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/06/08 17:18:08 by apeposhi         ###   ########.fr       */
+/*   Updated: 2024/06/09 16:08:55 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,25 +20,19 @@ char *ft_get_read(char *s_buff)
     if (!s_buff[0])
         return NULL;
     i = 0;
-    while (s_buff[i] && s_buff[i] != '\n')
+    while (s_buff[i] != '\0' && s_buff[i] != '\n')
         i++;
     str = (char *)malloc(sizeof(char) * (i + 2));
     if (!str)
     {
         free(s_buff);
-        return NULL;
+        return (NULL);
     }
-    i = 0;
-	while (s_buff[i] != '\0' && s_buff[i] != '\n')
-    {
+    i = -1;
+	while (s_buff[++i] && s_buff[i] != '\n')
         str[i] = s_buff[i];
-        i++;
-    }
     if (s_buff[i] == '\n')
-	{
-        str[i] = s_buff[i];
-		i++;
-	}
+        str[i++] = '\n';
 	*(str + i) = '\0';
     return (str);
 }
@@ -72,7 +66,7 @@ char	*ft_get_buff(char *s_buff)
 	return (str);
 }
 
-char	*ft_get_line_and_store_output(int fd, char *s_buff)
+char	*ft_get_buffer(int fd, char *s_buff)
 {
 	char	*t_buff;
 	int		byte_r;
@@ -109,7 +103,7 @@ char	*get_next_line(int fd)
 		}
 		return (NULL);
 	}
-	static_buffer = ft_get_line_and_store_output(fd, static_buffer);
+	static_buffer = ft_get_buffer(fd, static_buffer);
 	if (!static_buffer)
 		return (NULL);
 	read_l = ft_get_read(static_buffer);

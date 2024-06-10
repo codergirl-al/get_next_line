@@ -6,42 +6,42 @@
 /*   By: apeposhi <apeposhi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 16:46:40 by apeposhi          #+#    #+#             */
-/*   Updated: 2024/06/09 16:09:20 by apeposhi         ###   ########.fr       */
+/*   Updated: 2024/06/09 18:10:35 by apeposhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
-char *ft_get_read(char *s_buff)
+char	*ft_get_read(char *s_buff)
 {
-    int i;
-    char *str;
+	char	*str;
+	int		i;
 
-    if (!s_buff[0])
-        return NULL;
-    i = 0;
-    while (s_buff[i] != '\0' && s_buff[i] != '\n')
-        i++;
-    str = (char *)malloc(sizeof(char) * (i + 2));
-    if (!str)
-    {
-        free(s_buff);
-        return (NULL);
-    }
-    i = -1;
+	if (!s_buff[0])
+		return (NULL);
+	i = 0;
+	while (s_buff[i] != '\0' && s_buff[i] != '\n')
+		i++;
+	str = (char *)malloc(sizeof(char) * (i + 2));
+	if (!str)
+	{
+		free(s_buff);
+		return (NULL);
+	}
+	i = -1;
 	while (s_buff[++i] && s_buff[i] != '\n')
-        str[i] = s_buff[i];
-    if (s_buff[i] == '\n')
-        str[i++] = '\n';
+		str[i] = s_buff[i];
+	if (s_buff[i] == '\n')
+		str[i++] = '\n';
 	*(str + i) = '\0';
-    return (str);
+	return (str);
 }
 
 char	*ft_get_buff(char *s_buff)
 {
+	char	*str;
 	int		i;
 	int		c;
-	char	*str;
 
 	i = 0;
 	while (s_buff[i] && s_buff[i] != '\n')
